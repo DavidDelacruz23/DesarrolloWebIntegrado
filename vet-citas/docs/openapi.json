@@ -1,0 +1,1099 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "VetCitas — API de citas veterinarias",
+    "description": "CRUD de usuarios, servicios y reservas. Inicia sesión en el panel antes de probar. Las operaciones respetan el rol de la sesión y la protección CSRF.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/usuarios/{id}": {
+      "get": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "obtener",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "actualizar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "eliminar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Recurso eliminado"
+          }
+        }
+      }
+    },
+    "/api/usuarios/me": {
+      "get": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "perfil_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "perfil",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/servicios/{id}": {
+      "get": {
+        "tags": [
+          "servicio-controller"
+        ],
+        "operationId": "obtener_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicioResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "servicio-controller"
+        ],
+        "operationId": "actualizar_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicioResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "servicio-controller"
+        ],
+        "operationId": "eliminar_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Recurso eliminado"
+          }
+        }
+      }
+    },
+    "/api/reservas/{id}": {
+      "get": {
+        "tags": [
+          "reserva-controller"
+        ],
+        "operationId": "obtener_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservaResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "reserva-controller"
+        ],
+        "operationId": "actualizar_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservaResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "reserva-controller"
+        ],
+        "operationId": "eliminar_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Recurso eliminado"
+          }
+        }
+      }
+    },
+    "/api/usuarios": {
+      "get": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "listar",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "usuario-controller"
+        ],
+        "operationId": "crear",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Recurso creado",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/servicios": {
+      "get": {
+        "tags": [
+          "servicio-controller"
+        ],
+        "operationId": "listar_1",
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServicioResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "servicio-controller"
+        ],
+        "operationId": "crear_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Recurso creado",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicioResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reservas": {
+      "get": {
+        "tags": [
+          "reserva-controller"
+        ],
+        "operationId": "listar_2",
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PENDIENTE",
+                "CONFIRMADA",
+                "ATENDIDA",
+                "CANCELADA"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReservaResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "reserva-controller"
+        ],
+        "operationId": "crear_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Recurso creado",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/registro": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "registro",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistroRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Recurso creado",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reservas/{id}/estado": {
+      "patch": {
+        "tags": [
+          "reserva-controller"
+        ],
+        "operationId": "estado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/veterinarios": {
+      "get": {
+        "tags": [
+          "servicio-controller"
+        ],
+        "operationId": "veterinarios",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProfesionalResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/sesion": {
+      "get": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "sesion",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/csrf": {
+      "get": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "token",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CsrfToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UsuarioRequest": {
+        "required": [
+          "activo",
+          "correo",
+          "nombre",
+          "rol",
+          "telefono"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 120,
+            "minLength": 0,
+            "type": "string"
+          },
+          "correo": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "telefono": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 72,
+            "minLength": 0,
+            "type": "string"
+          },
+          "rol": {
+            "type": "string",
+            "enum": [
+              "CLIENTE",
+              "VETERINARIO",
+              "ADMIN"
+            ]
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UsuarioResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "correo": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "rol": {
+            "type": "string",
+            "enum": [
+              "CLIENTE",
+              "VETERINARIO",
+              "ADMIN"
+            ]
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PerfilRequest": {
+        "required": [
+          "correo",
+          "nombre",
+          "telefono"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 120,
+            "minLength": 0,
+            "type": "string"
+          },
+          "correo": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "telefono": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          }
+        }
+      },
+      "ServicioRequest": {
+        "required": [
+          "activo",
+          "descripcion",
+          "duracionMinutos",
+          "nombre",
+          "precio"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "descripcion": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string"
+          },
+          "precio": {
+            "minimum": 0.0,
+            "exclusiveMinimum": false,
+            "type": "number"
+          },
+          "duracionMinutos": {
+            "maximum": 240,
+            "minimum": 15,
+            "type": "integer",
+            "format": "int32"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServicioResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "duracionMinutos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ReservaRequest": {
+        "required": [
+          "fechaHora",
+          "mascota",
+          "motivo",
+          "servicioId",
+          "veterinarioId"
+        ],
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "veterinarioId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "servicioId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "mascota": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "motivo": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string"
+          },
+          "fechaHora": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ReservaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "usuarioId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cliente": {
+            "type": "string"
+          },
+          "veterinarioId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "veterinario": {
+            "type": "string"
+          },
+          "servicioId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "servicio": {
+            "type": "string"
+          },
+          "mascota": {
+            "type": "string"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "fechaHora": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "estado": {
+            "type": "string",
+            "enum": [
+              "PENDIENTE",
+              "CONFIRMADA",
+              "ATENDIDA",
+              "CANCELADA"
+            ]
+          }
+        }
+      },
+      "RegistroRequest": {
+        "required": [
+          "correo",
+          "nombre",
+          "password",
+          "telefono"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "maxLength": 120,
+            "minLength": 0,
+            "type": "string"
+          },
+          "correo": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "telefono": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 72,
+            "minLength": 8,
+            "type": "string"
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "correo": {
+            "type": "string"
+          },
+          "rol": {
+            "type": "string",
+            "enum": [
+              "CLIENTE",
+              "VETERINARIO",
+              "ADMIN"
+            ]
+          },
+          "mensaje": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequest": {
+        "required": [
+          "correo",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "correo": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 72,
+            "minLength": 0,
+            "type": "string"
+          }
+        }
+      },
+      "EstadoRequest": {
+        "required": [
+          "estado"
+        ],
+        "type": "object",
+        "properties": {
+          "estado": {
+            "type": "string",
+            "enum": [
+              "PENDIENTE",
+              "CONFIRMADA",
+              "ATENDIDA",
+              "CANCELADA"
+            ]
+          }
+        }
+      },
+      "ProfesionalResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          }
+        }
+      },
+      "CsrfToken": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "parameterName": {
+            "type": "string"
+          },
+          "headerName": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

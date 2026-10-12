@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración | VetCitas</title><link rel="stylesheet" href="/css/panel.css">
+</head>
+<body data-rol="ADMIN">
+    <!-- La navegación se adapta al rol, pero los permisos siempre se comprueban también en Java. -->
+    <aside class="sidebar">
+        <a class="marca" href="/">🐾 <span>VetCitas<small>CUIDADO QUE CONECTA</small></span></a>
+        <div class="nav-caption">MI ESPACIO</div>
+        <nav id="navegacion" aria-label="Secciones del panel"></nav>
+        <div class="sidebar-foot"><span class="live-dot"></span> Agenda de la clínica<br><small>Horarios en America/Lima</small></div>
+    </aside>
+    <div class="workspace">
+        <header class="topbar"><span id="rolVisible">Administración</span><div class="userbar"><span id="nombreSesion">Cargando…</span><button id="salir" class="btn ghost">Cerrar sesión</button></div></header>
+        <main>
+            <div class="intro"><div><p class="eyebrow" id="fechaActual"></p><h1 id="titulo">Tu agenda, en un solo lugar.</h1><p id="subtitulo" class="muted">Organiza cada visita y acompaña el cuidado de sus mascotas.</p></div><span class="intro-mark" aria-hidden="true">✚</span></div>
+            <!-- aria-live anuncia éxitos y errores a quienes utilizan un lector de pantalla. -->
+            <div id="aviso" role="status" aria-live="polite" hidden></div>
+            <section id="resumen" class="stats" aria-label="Resumen de citas"></section>
+            <section class="surface"><div class="section-head"><div><h2 id="seccionTitulo">Citas</h2><p id="seccionAyuda" class="muted"></p></div><button id="nuevo" class="btn primary" hidden>+ Nueva cita</button></div>
+                <div id="filtros" class="filters"></div><div id="contenido" aria-live="polite"><p class="empty">Cargando información…</p></div>
+            </section>
+            <footer>VetCitas · Gestión de citas veterinarias <a href="/api-docs.html" target="_blank" rel="noopener">Explorar API</a></footer>
+        </main>
+    </div>
+    <!-- dialog aporta foco modal y cierre con Escape. Los formularios se crean según la operación. -->
+    <dialog id="editor" aria-labelledby="editorTitulo"><form id="formEditor"><div class="dialog-head"><h2 id="editorTitulo"></h2><button type="button" id="cerrarEditor" class="btn ghost" aria-label="Cerrar formulario">✕</button></div><div id="campos" class="form-grid"></div><p id="errorEditor" class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" id="cancelarEditor" class="btn ghost">Cancelar</button><button id="guardar" class="btn primary" type="submit">Guardar</button></div></form></dialog>
+    <dialog id="confirmacion" aria-labelledby="confirmarTitulo"><h2 id="confirmarTitulo">Confirmar acción</h2><p id="confirmarTexto"></p><div class="dialog-actions"><button id="noConfirmar" class="btn ghost">Volver</button><button id="siConfirmar" class="btn danger">Confirmar</button></div></dialog>
+    <script src="/js/api.js"></script><script src="/js/panel.js"></script>
+</body></html>

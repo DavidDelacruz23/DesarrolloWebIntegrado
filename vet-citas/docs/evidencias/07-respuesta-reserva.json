@@ -1,0 +1,15 @@
+{
+  "id": 2,
+  "usuarioId": 4,
+  "cliente": "Cliente editado",
+  "veterinarioId": 2,
+  "veterinario": "Carlos Ramírez",
+  "servicioId": 6,
+  "servicio": "Control Postman",
+  "mascota": "Luna",
+  "motivo": "Control de demostración",
+  "fechaHora": "2026-10-13T10:00:00",
+  "fin": "2026-10-13T10:30:00",
+  "precio": 65.0,
+  "estado": "PENDIENTE"
+}

@@ -1,0 +1,24 @@
+Pruebas con H2
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.45 s -- in com.vetcitas.gestion.ApiIntegrationTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  20.557 s
+
+Pruebas con MySQL 8.0.46
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.74 s -- in com.vetcitas.gestion.ApiIntegrationTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  20.636 s
+
+Compilación y pruebas tras integrar Swagger
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.67 s -- in com.vetcitas.gestion.ApiIntegrationTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  20.061 s
+
+Compilación final con anotaciones OpenAPI
+[INFO] BUILD SUCCESS
+[INFO] Total time:  4.738 s
+
+Validación de database/schema.sql con Hibernate ddl-auto=validate
+2026-10-11T16:23:21.597-05:00  INFO 5180 --- [gestion-citas-veterinarias] [           main] .v.g.GestionCitasVeterinariasApplication : Started GestionCitasVeterinariasApplication in 5.627 seconds (process running for 6.138)

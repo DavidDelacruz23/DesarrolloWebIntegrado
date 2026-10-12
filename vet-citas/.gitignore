@@ -1,0 +1,7 @@
+# Archivos generados, credenciales locales y configuración personal del IDE.
+backend/target/
+.idea/
+.vscode/
+*.iml
+.env
+*.log

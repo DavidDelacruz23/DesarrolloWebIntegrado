@@ -1,0 +1,415 @@
+{
+  "info": {
+    "name": "VetCitas · Semana 10",
+    "description": "Ejecutar en orden con perfil demo y cookies habilitadas. Crea y luego borra sus propios registros.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "adminCorreo",
+      "value": "admin@vetcitas.com"
+    },
+    {
+      "key": "adminPassword",
+      "value": "Password123"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Se solicita un token antes de operaciones que cambian datos.",
+          "if (!['GET', 'HEAD', 'OPTIONS'].includes(pm.request.method)) {",
+          "    pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/auth/csrf'), method:'GET'}, (err, res) => {",
+          "        if (err) throw err;",
+          "        const csrf = res.json();",
+          "        pm.request.headers.upsert({key:csrf.headerName, value:csrf.token});",
+          "    });",
+          "}",
+          "// Una fecha futura en hora de Lima evita que la colección quede obsoleta.",
+          "const future = new Date(Date.now() + 2*86400000 - 5*3600000);",
+          "pm.collectionVariables.set('fechaCita', future.toISOString().slice(0,10)+'T10:00:00');"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "1 · Autenticación",
+      "item": [
+        {
+          "name": "Obtener token CSRF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/auth/csrf"
+          }
+        },
+        {
+          "name": "Entrar como administrador",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"correo\": \"{{adminCorreo}}\",\n  \"password\": \"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Consultar sesión",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/auth/sesion"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2 · Usuarios y servicios",
+      "item": [
+        {
+          "name": "Crear cliente de prueba",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Cliente Postman\",\n  \"correo\": \"postman-{{$timestamp}}@ejemplo.com\",\n  \"telefono\": \"999888777\",\n  \"password\": \"Password123\",\n  \"rol\": \"CLIENTE\",\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Operación correcta', () => pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.collectionVariables.set('usuarioId',pm.response.json().id);",
+                  "pm.collectionVariables.set('usuarioCorreo',pm.response.json().correo);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/usuarios"
+          }
+        },
+        {
+          "name": "Consultar usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}"
+          }
+        },
+        {
+          "name": "Editar usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Cliente editado\",\n  \"correo\": \"{{usuarioCorreo}}\",\n  \"telefono\": \"999888777\",\n  \"password\": \"\",\n  \"rol\": \"CLIENTE\",\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Crear servicio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/servicios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Control Postman\",\n  \"descripcion\": \"Servicio creado por la colección\",\n  \"precio\": 55,\n  \"duracionMinutos\": 30,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Operación correcta', () => pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.collectionVariables.set('servicioId',pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar servicio por nombre (JPQL)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicios?nombre=Postman"
+          }
+        },
+        {
+          "name": "Consultar servicio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicios/{{servicioId}}"
+          }
+        },
+        {
+          "name": "Editar servicio",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/servicios/{{servicioId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Control Postman\",\n  \"descripcion\": \"Servicio creado por la colección\",\n  \"precio\": 65,\n  \"duracionMinutos\": 30,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Listar veterinarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/veterinarios"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Hay un veterinario activo',()=>pm.expect(pm.response.json().length).to.be.above(0));",
+                  "pm.collectionVariables.set('veterinarioId',pm.response.json()[0].id);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3 · Reservas",
+      "item": [
+        {
+          "name": "Crear reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/reservas",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": \"{{usuarioId}}\",\n  \"servicioId\": \"{{servicioId}}\",\n  \"veterinarioId\": \"{{veterinarioId}}\",\n  \"mascota\": \"Luna\",\n  \"motivo\": \"Control de demostración\",\n  \"fechaHora\": \"{{fechaCita}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Operación correcta', () => pm.expect(pm.response.code).to.be.within(200,299));",
+                  "pm.collectionVariables.set('reservaId',pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar reservas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/reservas"
+          }
+        },
+        {
+          "name": "Consultar reserva",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
+          }
+        },
+        {
+          "name": "Editar motivo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/reservas/{{reservaId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": \"{{usuarioId}}\",\n  \"servicioId\": \"{{servicioId}}\",\n  \"veterinarioId\": \"{{veterinarioId}}\",\n  \"mascota\": \"Luna\",\n  \"motivo\": \"Control actualizado\",\n  \"fechaHora\": \"{{fechaCita}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Confirmar cita",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/reservas/{{reservaId}}/estado",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"CONFIRMADA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Filtrar confirmadas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/reservas?estado=CONFIRMADA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4 · Limpiar registros de esta colección",
+      "item": [
+        {
+          "name": "Eliminar reserva de prueba",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
+          }
+        },
+        {
+          "name": "Eliminar servicio de prueba",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicios/{{servicioId}}"
+          }
+        },
+        {
+          "name": "Eliminar cliente de prueba",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}"
+          }
+        },
+        {
+          "name": "Cerrar sesión",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/logout",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

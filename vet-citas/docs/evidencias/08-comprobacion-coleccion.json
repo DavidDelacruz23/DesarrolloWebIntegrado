@@ -1,0 +1,134 @@
+[
+  {
+    "prueba": "Obtener token CSRF",
+    "metodo": "GET",
+    "ruta": "/api/auth/csrf",
+    "estado": 200
+  },
+  {
+    "prueba": "Entrar como administrador",
+    "metodo": "POST",
+    "ruta": "/api/auth/login",
+    "estado": 200
+  },
+  {
+    "prueba": "Consultar sesión",
+    "metodo": "GET",
+    "ruta": "/api/auth/sesion",
+    "estado": 200
+  },
+  {
+    "prueba": "Crear cliente de prueba",
+    "metodo": "POST",
+    "ruta": "/api/usuarios",
+    "estado": 201
+  },
+  {
+    "prueba": "Listar usuarios",
+    "metodo": "GET",
+    "ruta": "/api/usuarios",
+    "estado": 200
+  },
+  {
+    "prueba": "Consultar usuario",
+    "metodo": "GET",
+    "ruta": "/api/usuarios/{{usuarioId}}",
+    "estado": 200
+  },
+  {
+    "prueba": "Editar usuario",
+    "metodo": "PUT",
+    "ruta": "/api/usuarios/{{usuarioId}}",
+    "estado": 200
+  },
+  {
+    "prueba": "Crear servicio",
+    "metodo": "POST",
+    "ruta": "/api/servicios",
+    "estado": 201
+  },
+  {
+    "prueba": "Buscar servicio por nombre (JPQL)",
+    "metodo": "GET",
+    "ruta": "/api/servicios?nombre=Postman",
+    "estado": 200
+  },
+  {
+    "prueba": "Consultar servicio",
+    "metodo": "GET",
+    "ruta": "/api/servicios/{{servicioId}}",
+    "estado": 200
+  },
+  {
+    "prueba": "Editar servicio",
+    "metodo": "PUT",
+    "ruta": "/api/servicios/{{servicioId}}",
+    "estado": 200
+  },
+  {
+    "prueba": "Listar veterinarios",
+    "metodo": "GET",
+    "ruta": "/api/veterinarios",
+    "estado": 200
+  },
+  {
+    "prueba": "Crear reserva",
+    "metodo": "POST",
+    "ruta": "/api/reservas",
+    "estado": 201
+  },
+  {
+    "prueba": "Listar reservas",
+    "metodo": "GET",
+    "ruta": "/api/reservas",
+    "estado": 200
+  },
+  {
+    "prueba": "Consultar reserva",
+    "metodo": "GET",
+    "ruta": "/api/reservas/{{reservaId}}",
+    "estado": 200
+  },
+  {
+    "prueba": "Editar motivo",
+    "metodo": "PUT",
+    "ruta": "/api/reservas/{{reservaId}}",
+    "estado": 200
+  },
+  {
+    "prueba": "Confirmar cita",
+    "metodo": "PATCH",
+    "ruta": "/api/reservas/{{reservaId}}/estado",
+    "estado": 200
+  },
+  {
+    "prueba": "Filtrar confirmadas",
+    "metodo": "GET",
+    "ruta": "/api/reservas?estado=CONFIRMADA",
+    "estado": 200
+  },
+  {
+    "prueba": "Eliminar reserva de prueba",
+    "metodo": "DELETE",
+    "ruta": "/api/reservas/{{reservaId}}",
+    "estado": 204
+  },
+  {
+    "prueba": "Eliminar servicio de prueba",
+    "metodo": "DELETE",
+    "ruta": "/api/servicios/{{servicioId}}",
+    "estado": 204
+  },
+  {
+    "prueba": "Eliminar cliente de prueba",
+    "metodo": "DELETE",
+    "ruta": "/api/usuarios/{{usuarioId}}",
+    "estado": 204
+  },
+  {
+    "prueba": "Cerrar sesión",
+    "metodo": "POST",
+    "ruta": "/api/auth/logout",
+    "estado": 200
+  }
+]
