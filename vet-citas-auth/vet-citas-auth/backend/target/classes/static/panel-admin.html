@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador | VetCitas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="panel-header">
+    <h1>🐾 VetCitas - Panel Administrador</h1>
+    <button class="boton-secundario" onclick="cerrarSesion()">Cerrar sesión</button>
+</header>
+<main class="panel-contenido">
+    <div class="tarjeta-rol">
+        <h2>Hola, <span id="nombreUsuarioSesion">...</span> 👋</h2>
+        <p>Este es el panel del <strong>Administrador</strong>. Aquí, en un próximo entregable,
+        podrás gestionar usuarios, asignar roles y ver reportes generales del sistema.</p>
+    </div>
+</main>
+<script src="js/auth.js"></script>
+<script>
+    verificarSesionActiva('ADMIN');
+</script>
+</body>
+</html>

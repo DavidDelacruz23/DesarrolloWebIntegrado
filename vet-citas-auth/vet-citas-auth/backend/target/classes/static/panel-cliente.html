@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Cliente | VetCitas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="panel-header">
+    <h1>🐾 VetCitas - Panel Cliente</h1>
+    <button class="boton-secundario" onclick="cerrarSesion()">Cerrar sesión</button>
+</header>
+<main class="panel-contenido">
+    <div class="tarjeta-rol">
+        <h2>Hola, <span id="nombreUsuarioSesion">...</span> 👋</h2>
+        <p>Este es el panel del <strong>Cliente</strong>. Aquí, en un próximo entregable,
+        podrás reservar citas para tu mascota y ver tu historial de consultas.</p>
+    </div>
+</main>
+<script src="js/auth.js"></script>
+<script>
+    // Verifica que exista una sesión activa con rol CLIENTE antes de mostrar el panel.
+    verificarSesionActiva('CLIENTE');
+</script>
+</body>
+</html>

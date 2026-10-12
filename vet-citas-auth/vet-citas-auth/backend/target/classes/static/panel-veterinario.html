@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Veterinario | VetCitas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="panel-header">
+    <h1>🐾 VetCitas - Panel Veterinario</h1>
+    <button class="boton-secundario" onclick="cerrarSesion()">Cerrar sesión</button>
+</header>
+<main class="panel-contenido">
+    <div class="tarjeta-rol">
+        <h2>Hola, Dr(a). <span id="nombreUsuarioSesion">...</span> 👋</h2>
+        <p>Este es el panel del <strong>Veterinario</strong>. Aquí, en un próximo entregable,
+        podrás ver tu agenda de citas asignadas y el historial clínico de los pacientes.</p>
+    </div>
+</main>
+<script src="js/auth.js"></script>
+<script>
+    verificarSesionActiva('VETERINARIO');
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | VetCitas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main class="auth-page">
+    <div class="auth-contenedor">
+
+        <!-- Panel lateral decorativo, oculto en pantallas pequeñas -->
+        <aside class="auth-panel-lateral">
+            <div class="icono-pata">🐾</div>
+            <h1>VetCitas</h1>
+            <p>
+                Sistema de gestión de citas veterinarias. Agenda, confirma y
+                administra las consultas de tu mascota en un solo lugar.
+            </p>
+        </aside>
+
+        <!-- Formulario de login -->
+        <section class="auth-formulario-wrapper">
+            <h2>Bienvenido de nuevo</h2>
+            <p class="auth-subtitulo">Inicia sesión para continuar</p>
+
+            <!-- Mensaje de error/éxito general, controlado por auth.js -->
+            <div id="mensajeGlobal" class="mensaje-global"></div>
+
+            <!-- novalidate: desactivamos la validación nativa del navegador
+                 porque implementamos nuestra propia validación en auth.js -->
+            <form id="formLogin" novalidate>
+                <div class="campo">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+                    <span class="mensaje-error-campo" id="errorCorreo"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" autocomplete="current-password">
+                    <span class="mensaje-error-campo" id="errorPassword"></span>
+                </div>
+
+                <button type="submit" class="boton-primario" id="btnLogin">Iniciar sesión</button>
+            </form>
+
+            <a href="registro.html" class="enlace-secundario">¿No tienes cuenta? Regístrate aquí</a>
+        </section>
+    </div>
+</main>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* =====================================================================
+   VARIABLES DE COLOR - Paleta alusiva a una veterinaria
+   ===================================================================== */
+:root {
+    --verde-principal: #2f9e6f;
+    --verde-oscuro: #1f7a54;
+    --azul-principal: #2c7fb8;
+    --azul-oscuro: #1c5d8c;
+    --gris-texto: #33403a;
+    --gris-claro: #f2f7f5;
+    --blanco: #ffffff;
+    --rojo-error: #d9534f;
+    --verde-exito: #3ba776;
+    --sombra: 0 10px 30px rgba(31, 122, 84, 0.15);
+    --radio: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    color: var(--gris-texto);
+    background: linear-gradient(135deg, var(--gris-claro) 0%, #e3f0ec 100%);
+    min-height: 100vh;
+}
+
+/* =====================================================================
+   LAYOUT GENERAL DE LAS PAGINAS DE AUTENTICACION
+   ===================================================================== */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-contenedor {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    width: 100%;
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+}
+
+@media (max-width: 800px) {
+    .auth-contenedor {
+        grid-template-columns: 1fr;
+    }
+    .auth-panel-lateral {
+        display: none;
+    }
+}
+
+/* Panel lateral decorativo con la identidad de la veterinaria */
+.auth-panel-lateral {
+    background: linear-gradient(160deg, var(--verde-principal) 0%, var(--azul-principal) 100%);
+    color: var(--blanco);
+    padding: 48px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+.auth-panel-lateral h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.auth-panel-lateral p {
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.auth-panel-lateral .icono-pata {
+    font-size: 2.6rem;
+}
+
+.auth-formulario-wrapper {
+    padding: 48px 40px;
+}
+
+.auth-formulario-wrapper h2 {
+    margin-top: 0;
+    color: var(--verde-oscuro);
+}
+
+.auth-subtitulo {
+    color: #6b7a72;
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+}
+
+/* =====================================================================
+   CAMPOS DEL FORMULARIO
+   ===================================================================== */
+.campo {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--gris-texto);
+}
+
+.campo input {
+    padding: 12px 14px;
+    border: 1.5px solid #d5e3dd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 3px rgba(44, 127, 184, 0.15);
+}
+
+.campo input.campo-invalido {
+    border-color: var(--rojo-error);
+}
+
+.mensaje-error-campo {
+    color: var(--rojo-error);
+    font-size: 0.8rem;
+    min-height: 16px;
+}
+
+/* =====================================================================
+   BOTONES Y MENSAJES GLOBALES
+   ===================================================================== */
+.boton-primario {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--verde-principal), var(--azul-principal));
+    color: var(--blanco);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.boton-primario:hover {
+    opacity: 0.92;
+}
+
+.boton-primario:active {
+    transform: scale(0.99);
+}
+
+.boton-primario:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.enlace-secundario {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 0.9rem;
+    color: var(--azul-oscuro);
+    text-decoration: none;
+}
+
+.enlace-secundario:hover {
+    text-decoration: underline;
+}
+
+.mensaje-global {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+    display: none;
+}
+
+.mensaje-global.visible {
+    display: block;
+}
+
+.mensaje-global.error {
+    background: #fdecea;
+    color: var(--rojo-error);
+    border: 1px solid #f5c6c3;
+}
+
+.mensaje-global.exito {
+    background: #e6f6ee;
+    color: var(--verde-exito);
+    border: 1px solid #b9e6cd;
+}
+
+/* =====================================================================
+   PANEL PRINCIPAL (post-login)
+   ===================================================================== */
+.panel-header {
+    background: linear-gradient(135deg, var(--verde-principal), var(--azul-principal));
+    color: var(--blanco);
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.boton-secundario {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--blanco);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.panel-contenido {
+    padding: 40px 32px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tarjeta-rol {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 28px;
+    border-left: 6px solid var(--verde-principal);
+}
